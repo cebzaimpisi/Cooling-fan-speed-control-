@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang=”en”>
+<head>
+ <meta charset=”UTF-8”>
+ <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+ <title>Cooling Fan Animation</title>
+ <style>
+ Body {
+                    Display: flex;
+                    Flex-direction: column;
+                    Justify-content: center;
+                    Align-items: center;
+                    Height: 100vh;
+                    Background-color: #f0f0f0;
+                    Margin: 0;
+                }
+ .fan-container {
+                Position: relative;
+                Width: 200px;
+                Height: 200px;
+                Border: 5px solid #000;
+                Border-radius: 50%;
+                Overflow: hidden;
+ }
+ h2 {
+    color: rgb(223, 115, 13);}
+
+ .fan {
+        Position: absolute;
+        Top: 50%;
+        Left: 50%;
+        Width: 100%;
+        Height: 100%;
+        Transform-origin: center;
+        Transform: translate(-50%, -50%);
+        Animation: spin 1s linear infinite;
+ }
+ .blade {
+        Position: absolute;
+        Top: 50%;
+        Left: 50%;
+        Width: 10px;
+        Height: 80px;
+        Background-color: #c41212;
+        Transform-origin: bottom;
+        }
+ .blade:nth-child(1) {
+   Transform: rotate(0deg) translate(-50%, -50%);
+ }
+ .blade:nth-child(2) {
+    Transform: rotate(120deg) translate(-50%, -50%);
+ }
+ .blade:nth-child(3) {
+    Transform: rotate(240deg) translate(-50%, -50%);
+ }
+ @keyframes spin {
+ 100% {
+ Transform: translate(-50%, -50%) rotate(360deg);
+ }
+ }
+ .controls {
+ Margin-top: 20px;
+ }
+  .btnstart{
+       background-color: aqua;
+  }
+   .btnstop{
+       background-color: #c41212;
+   }
+   button{
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+   }
+    button:hover{
+       background-color: blue;
+    }
+   .speedfont{
+       font-size: 20px;
+   }
+   
+ </style>
+
+</head>
+<body>
+  <h2>Cooling Fan Speed_Control</h2> 
+ <div class="fan-container">    
+ <div class="fan" id="fan">
+ <div class="blade"></div>
+ <div class="blade"></div>
+ <div class="blade"></div>
+ </div>
+ </div>
+ <div class="controls">
+ <button class="btnstart" id="startBtn">Start</button>
+ <button class="btnstop" id="stopBtn">Stop</button>
+  <br>
+  <br>
+ <label class="speedfont" for="speedControl">Speed: </label>
+ <input type="range" id="speedControl" min="0.1" max="10" step="0.1" value="0">
+ <div id="duration"></div>
+ </div>
+
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+   const fan = document.getElementById('fan');
+   const startBtn = document.getElementById('startBtn');
+   const stopBtn = document.getElementById('stopBtn');
+   const speedControl = document.getElementById('speedControl');
+   const duration = document.getElementById('duration');
+
+ startBtn.addEventListener('click', function() {
+         fan.style.animationPlayState = 'running';
+ });
+
+ stopBtn.addEventListener('click', function() {
+       fan.style.animationPlayState = 'paused';
+ });
+
+ speedControl.addEventListener('input', function() {
+              const speed = speedControl.value;
+              fan.style.animationDuration = `${1 / speed}s`;
+              duration.innerText = `Velocity:${(1/speed).toFixed(2)}m/s`;
+              
+               
+ });
+ 
+ // Initialize animation to be paused
+ Fan.style.animationPlayState = 'paused';
+ });
+  
+ </script>
+</body>
+</html>
